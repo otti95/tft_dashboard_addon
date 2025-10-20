@@ -1,5 +1,13 @@
 {
-  "name": "Otti95 Add-ons",
+  "name": "TFT Dashboard Repository",
+  "slug": "tft_dashboard",
   "url": "https://github.com/otti95/tft_dashboard_addon",
-  "maintainer": "Otti95"
+  "maintainer": "otti95",
+  "version": "1.0",
+  "addons": [
+    {
+      "name": "TFT Dashboard",
+      "repository": "tft_dashboard"
+    }
+  ]
 }
