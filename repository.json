@@ -1,9 +1,10 @@
 {
   "name": "TFT Dashboard Repository",
-  "slug": "tft_dashboard",
+  "slug": "tft_dashboard_repo",
   "url": "https://github.com/otti95/tft_dashboard_addon",
   "maintainer": "otti95",
   "version": "1.0",
+  "description": "Repository für das TFT Dashboard Home Assistant Add-on",
   "addons": [
     {
       "name": "TFT Dashboard",
