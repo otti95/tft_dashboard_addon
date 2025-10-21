@@ -5,7 +5,7 @@ import socket
 from datetime import datetime
 
 # === Einstellungen ===
-PORT = "/dev/ttyUSB0"   # Arduino Nano
+PORT = "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"  # Arduino Nano
 BAUD = 9600
 
 # --- Hilfsfunktionen ---
