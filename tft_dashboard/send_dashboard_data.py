@@ -46,7 +46,7 @@ def get_power_usage():
 
 # --- serielle Verbindung ---
 ser = serial.Serial(PORT, BAUD, timeout=1)
-time.sleep(2)  # Arduino bereit machen
+# time.sleep(2)  # Arduino bereit machen
 
 # --- Hauptschleife ---
 while True:
