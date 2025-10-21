@@ -6,7 +6,7 @@ import socket
 from datetime import datetime
 
 # === Einstellungen ===
-PORT = "/dev/ttyUSB0"   # Arduino
+PORT = "/dev/ttyAMA10"   # Arduino
 BAUD = 9600
 
 def get_temperature():
