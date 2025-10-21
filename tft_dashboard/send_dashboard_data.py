@@ -1,17 +1,16 @@
 import serial
 import psutil
 import time
-import subprocess
 import socket
 from datetime import datetime
 
 # === Einstellungen ===
-PORT = "/dev/ttyUSB0"   # Arduino
+PORT = "/dev/ttyUSB0"   # Arduino Nano
 BAUD = 9600
 
+# --- Hilfsfunktionen ---
 def get_temperature():
     try:
-        # Raspberry Pi CPU-Temperatur
         with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
             temp_str = f.readline().strip()
             return float(temp_str) / 1000.0
@@ -20,8 +19,7 @@ def get_temperature():
 
 def get_cpu_freq():
     try:
-        freq = psutil.cpu_freq().current
-        return int(freq)
+        return int(psutil.cpu_freq().current)
     except:
         return 0
 
@@ -43,13 +41,14 @@ def get_network_status():
         return "OFF", 0
 
 def get_power_usage():
-    # Dummywert, später anpassen falls echte Messung möglich
+    # Dummywert, kann angepasst werden
     return 12.5
 
 # --- serielle Verbindung ---
 ser = serial.Serial(PORT, BAUD, timeout=1)
 time.sleep(2)  # Arduino bereit machen
 
+# --- Hauptschleife ---
 while True:
     cpu = psutil.cpu_percent()
     temp = get_temperature()
@@ -60,6 +59,12 @@ while True:
     net, ping = get_network_status()
     now = datetime.now().strftime("%H:%M")
 
-    msg = f"CPU:{cpu:.1f}%,TEMP:{temp:.1f}C,FREQ:{freq}MHz,RAM:{ram_used}/{ram_total}MB,DISK:{disk}%,POWER:{power:.1f}W,NET:{net} ({ping}ms),TIME:{now}\n"
+    # --- Nachricht für Arduino TFT ---
+    msg = (
+        f"TIME:{now},CPU:{cpu:.1f}%,TEMP:{temp:.1f}C,FREQ:{freq}MHz,"
+        f"RAM:{ram_used}/{ram_total}MB,DISK:{disk}%,POWER:{power:.1f}W,NET:{net} ({ping}ms)\n"
+    )
+
     ser.write(msg.encode("utf-8"))
-    time.sleep(5)
+    print(f"Gesendet: {msg.strip()}")
+    time.sleep(5)  # alle 5 Sekunden aktualisieren
