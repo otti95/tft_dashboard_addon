@@ -9,6 +9,6 @@
   "options": {},
   "schema": {},
   "ports": {},
-  "devices": ["/dev/ttyAMA10:/dev/ttyAMA10:rwm"],
+  "devices": ["/dev/ttyUSB0:/dev/ttyUSB0:rwm"],
   "privileged": ["SYS_RAWIO"]
 }
